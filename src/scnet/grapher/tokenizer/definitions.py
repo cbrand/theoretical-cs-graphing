@@ -20,5 +20,5 @@ STRING_PART_DEFINITION = r'(\\")|[^"\\]|(\\.)'
 STRING_DEFINITION = r'"({string_part})*"'.format(
     string_part=STRING_PART_DEFINITION,
 )
-SYMBOL_DEFINITION = r'[a-zA-Z]{1}([a-zA-Z]|%s|-|\\_)+' % NUMBER_DEFINITION
+SYMBOL_DEFINITION = r'[a-zA-Z]{1}([a-zA-Z]|%s|-|\\_)*' % NUMBER_DEFINITION
 COMMENT_DEFINITION = r'#[^\n]*'

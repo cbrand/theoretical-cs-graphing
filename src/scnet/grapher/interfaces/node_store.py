@@ -40,4 +40,5 @@ class INodeStore(Interface):
     def __iter__(self) -> iter:
         """
         Iterates through all given nodes.
+        @rtype: iter[INode]
         """

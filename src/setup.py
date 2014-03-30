@@ -11,6 +11,8 @@ requires = [
     "funcparserlib",
     "zope.interface",
     "zope.component",
+    "networkx",
+    "matplotlib",
 ]
 
 setup(
@@ -34,5 +36,5 @@ setup(
     install_requires=requires,
     entry_points="""\
 
-      """,
+    """,
 )
