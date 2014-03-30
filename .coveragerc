@@ -1,0 +1,12 @@
+[run]
+branch = True
+source=./scnet/grapher/
+omit=
+    */interfaces/*
+
+[report]
+exclude_lines=
+    pass
+    raise NotImplementedError()
+    pragma: no cover
+precision=2
