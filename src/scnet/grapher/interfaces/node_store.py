@@ -24,6 +24,13 @@ class INodeStore(Interface):
         @rtype: bool
         """
 
+    def one(self) -> "Node":
+        """
+        Returns one node in the node store.
+        This function is stable and should always
+        return the same Node.
+        """
+
     def __getitem__(self, key: str) -> "Node":
         """
         Returns the entry of this store.
@@ -41,4 +48,10 @@ class INodeStore(Interface):
         """
         Iterates through all given nodes.
         @rtype: iter[INode]
+        """
+
+    def __len__(self) -> int:
+        """
+        Returns the amount of stored nodes in
+        the system.
         """

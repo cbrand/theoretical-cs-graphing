@@ -20,4 +20,5 @@ class IEdge(Interface):
                           "starting from.")
     to_node = Attribute("The node to which this edge is "
                         "going to.")
+    nodes = Attribute("Returns the two nodes in this edge.")
     weight = Attribute("The optional weight of this edge.")

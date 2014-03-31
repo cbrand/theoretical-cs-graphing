@@ -55,3 +55,12 @@ class Edge(Abstract):
         to.
         """
         return self.node_store[self.to_node_name]
+
+    @property
+    def nodes(self) -> iter:
+        """
+        list of all edges which start
+        or end in this node
+        """
+        yield self.from_node
+        yield self.to_node

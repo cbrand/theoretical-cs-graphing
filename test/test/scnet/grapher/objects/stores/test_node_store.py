@@ -79,3 +79,27 @@ class TestNodeStore(unittest.TestCase):
         """
         with self.assertRaises(KeyError):
             self.node_store.get("NODE-3")
+
+    def test_one(self):
+        """
+        It should return a node when requesting one
+        via the "one" function.
+        """
+        node = self.node_store.one()
+        self.assertIsInstance(
+            node,
+            Node
+        )
+        self.assertIn(
+            node.name,
+            self.node_store
+        )
+
+    def test_length(self):
+        """
+        It should return the correct length.
+        """
+        self.assertEqual(
+            len(self.node_store),
+            2
+        )

@@ -11,3 +11,10 @@ class INode(Interface):
     """
 
     name = Attribute('The name of the node')
+
+    edges_from = Attribute('list of edges starting at this node')
+
+    edges_to = Attribute('list of edges ending at this node.')
+
+    edges = Attribute('list of all edges which start '
+                      'or end in this node')

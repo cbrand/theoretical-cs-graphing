@@ -52,3 +52,24 @@ class TestEdge(unittest.TestCase):
             self.edge.to_node.name,
             'ToNode'
         )
+
+    def test_access_nodes(self):
+        """
+        It should support the query of all nodes
+        in the relationship.
+        """
+        for node in self.edge.nodes:
+            self.assertIsInstance(
+                node,
+                Node
+            )
+        nodes = list(self.edge.nodes)
+        self.assertIn(
+            self.edge.to_node,
+            nodes
+        )
+        self.assertIn(
+            self.edge.from_node,
+            nodes
+        )
+        return nodes

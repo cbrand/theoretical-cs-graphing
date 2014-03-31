@@ -2,12 +2,16 @@
 
 from __future__ import unicode_literals
 
+from zope.interface import implementer
+
+from scnet.grapher.interfaces import IGraph
 from scnet.grapher.objects import (
     NodeStore,
     EdgeStore,
 )
 
 
+@implementer(IGraph)
 class ReaderReturn(object):
     """
     Representation of a return

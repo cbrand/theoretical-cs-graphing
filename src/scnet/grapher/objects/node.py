@@ -49,3 +49,10 @@ class Node(Abstract):
         @rtype: iter[IEdge]
         """
         return self.edge_store.to_node(self)
+
+    @property
+    def edges(self) -> list:
+        """
+        Returns a list of edges.
+        """
+        return self.edges_from + self.edges_to

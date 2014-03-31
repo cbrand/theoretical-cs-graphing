@@ -55,6 +55,14 @@ class NodeStore(object):
         """
         return node_name in self
 
+    def one(self) -> Node:
+        """
+        Returns one element in the node store.
+        (Useful for general checking algorithms).
+        """
+        nodes = list(self._nodes)
+        return nodes[0]
+
     def __getitem__(self, key: str) -> Node:
         """
         Returns the entry of this store.
@@ -75,3 +83,10 @@ class NodeStore(object):
         Iterates through all given nodes.
         """
         return self._nodes.__iter__()
+
+    def __len__(self) -> int:
+        """
+        Returns the amount of stored nodes in
+        the system.
+        """
+        return len(self.__nodes)

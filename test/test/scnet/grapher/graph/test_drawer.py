@@ -21,8 +21,10 @@ from scnet.grapher.objects import (
     Node,
 )
 
+from test.scnet.grapher.abstract_base_test import AbstractBaseTest
 
-class TestDrawer(unittest.TestCase):
+
+class TestDrawer(AbstractBaseTest):
 
     def setUp(self):
         # Bridge problem graph
@@ -30,7 +32,6 @@ class TestDrawer(unittest.TestCase):
             Node(str(number))
             for number in range(1, 12)
         ]
-        self.node_store = NodeStore(self.nodes)
         self.edges = [
             Edge("1", "2"),
             Edge("1", "3"),
@@ -47,16 +48,11 @@ class TestDrawer(unittest.TestCase):
             Edge("10", "11"),
             Edge("7", "11"),
         ]
-        self.edge_store = EdgeStore(self.edges)
 
-        def assign_entries(abstract_obj):
-            abstract_obj.node_store = self.node_store
-            abstract_obj.edge_store = self.edge_store
-
-        for node in self.nodes:
-            assign_entries(node)
-        for edge in self.edges:
-            assign_entries(edge)
+        self.prepare_graph(
+            nodes=self.nodes,
+            edges=self.edges
+        )
 
         self.graph_drawer = GraphDrawer(
             edge_store=self.edge_store,
