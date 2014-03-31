@@ -24,6 +24,7 @@ class Node(Abstract):
         """
         assert isinstance(node_name, str), 'Passed entry has to be of type str'
         self.name = node_name
+        super().__init__()
 
     def __str__(self) -> str:
         """
@@ -38,7 +39,7 @@ class Node(Abstract):
         this node.
         @rtype: iter[IEdge]
         """
-        return self._edge_store.from_node(self)
+        return self.edge_store.from_node(self)
 
     @property
     def edges_to(self) -> list:
@@ -47,4 +48,4 @@ class Node(Abstract):
         node.
         @rtype: iter[IEdge]
         """
-        return self._edge_store.to_node(self)
+        return self.edge_store.to_node(self)

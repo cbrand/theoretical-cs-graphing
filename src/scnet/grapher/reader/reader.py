@@ -65,22 +65,37 @@ class Reader(object):
         tokens = list(
             Tokenizer(self._file_handle).tokens
         )
-        entries = list(
-            self.flatten(
+        entries = [
+            item for item in self.flatten(
                 parser_definition.parse(tokens)
             )
-        )
+            if item is not None
+        ]
         edge_store = self._set_edge_store(entries)
         node_store = self._set_node_store(entries)
-        Validator(
+        for entry in entries:
+            entry.node_store = node_store
+            entry.edge_store = edge_store
+
+        self._validate(
             edge_store=edge_store,
             node_store=node_store,
-        ).validate()
+        )
 
         return ReaderReturn(
             edge_store=edge_store,
             node_store=node_store,
         )
+
+    def _validate(self, edge_store: IEdgeStore, node_store: INodeStore):
+        """
+        Validates the given graph represented in the edge store
+        and in the node store entries.
+        """
+        Validator(
+            edge_store=edge_store,
+            node_store=node_store,
+        ).validate()
 
     def flatten(self, list_object: list):
         """

@@ -22,6 +22,7 @@ class Edge(Abstract):
         self.from_node_name = from_node
         self.to_node_name = to_node
         self.weight = weight
+        super().__init__()
 
     def __str__(self):
         """
@@ -45,7 +46,7 @@ class Edge(Abstract):
         Returns the node from which this edge is
         starting.
         """
-        return self._node_store[self.from_node_name]
+        return self.node_store[self.from_node_name]
 
     @property
     def to_node(self) -> INode:
@@ -53,4 +54,4 @@ class Edge(Abstract):
         Returns the node where this edge is going
         to.
         """
-        return self._node_store[self.to_node_name]
+        return self.node_store[self.to_node_name]

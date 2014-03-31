@@ -14,23 +14,34 @@ class Abstract(object):
     functions for the given objects.
     """
 
-    @property
-    def _site_manager(self):
-        """
-        Returns the current valid site manager.
-        """
-        return getSiteManager()
+    def __init__(self):
+        self._node_store = None
+        self._edge_store = None
 
     @property
-    def _edge_store(self) -> IEdgeStore:
+    def edge_store(self) -> IEdgeStore:
         """
         Returns the current valid edge store.
         """
-        return self._site_manager.getUtility(IEdgeStore)
+        return self._edge_store
+
+    @edge_store.setter
+    def edge_store(self, value: IEdgeStore):
+        """
+        Sets the edge store of the given
+        """
+        self._edge_store = value
 
     @property
-    def _node_store(self) -> INodeStore:
+    def node_store(self) -> INodeStore:
         """
         Returns the current valid node store
         """
-        return self._site_manager.getUtility(INodeStore)
+        return self._node_store
+
+    @node_store.setter
+    def node_store(self, value: INodeStore):
+        """
+        Sets a specific node store for this element.
+        """
+        self._node_store = value
