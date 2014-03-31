@@ -27,7 +27,8 @@ class GraphDrawer(object):
         self.edge_store = edge_store
         self.node_store = node_store
 
-    def show(self):
+    def show(self):  # pragma: no cover
+                     # (not testable with unittest)
         self._draw()
         return plt.show()
 
@@ -59,8 +60,29 @@ class GraphDrawer(object):
         pos = networkx.fruchterman_reingold_layout(graph)
         networkx.draw(graph, pos, node_size=5000)
 
-        edge_weight=dict([((u,v,),int(d['weight'])) for u,v,d in graph.edges(data=True)])
-        networkx.draw_networkx_edge_labels(graph, pos, edge_labels=edge_weight)
+        self.edge_weights = self.get_edge_weights_for_label(
+            graph
+        )
+        networkx.draw_networkx_edge_labels(
+            graph,
+            pos,
+            edge_labels=self.get_edge_weights_for_label(
+                graph
+            )
+        )
+
+    def get_edge_weights_for_label(self, graph: networkx.Graph):
+        """
+        Returns a mapping for all edges which print the
+        weight if a weight has been given for the entry.
+        """
+        edge_labels = {}
+        for from_node, to_node, edge_data in graph.edges(data=True):
+            if 'weight' in edge_data:
+                edge_data[(from_node, to_node,)] = edge_data['weight']
+            else:
+                pass
+        return edge_labels
 
     def _add_edge(self, graph: networkx.Graph, edge: IEdge):
         """
