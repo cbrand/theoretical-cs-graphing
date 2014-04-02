@@ -58,7 +58,7 @@ class GraphDrawer(object):
         Draws the given graph.
         """
         pos = networkx.fruchterman_reingold_layout(graph)
-        networkx.draw(graph, pos, node_size=5000)
+        networkx.draw(graph, pos, node_size=1000)
 
         self.edge_weights = self.get_edge_weights_for_label(
             graph
