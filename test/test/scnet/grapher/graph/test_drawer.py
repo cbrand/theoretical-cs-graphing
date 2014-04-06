@@ -49,14 +49,14 @@ class TestDrawer(AbstractBaseTest):
             Edge("7", "11"),
         ]
 
-        self.prepare_graph(
+        self.graph = self.prepare_graph(
             nodes=self.nodes,
             edges=self.edges
         )
 
         self.graph_drawer = GraphDrawer(
-            edge_store=self.edge_store,
-            node_store=self.node_store,
+            edge_store=self.graph.edge_store,
+            node_store=self.graph.node_store,
         )
 
     def get_temp_filename(self, suffix='.png'):
@@ -87,11 +87,11 @@ class TestDrawer(AbstractBaseTest):
         if they are registered as an Utility
         """
         getSiteManager().registerUtility(
-            self.node_store,
+            self.graph.node_store,
             INodeStore
         )
         getSiteManager().registerUtility(
-            self.edge_store,
+            self.graph.edge_store,
             IEdgeStore
         )
         temp_png_file_name = self.get_temp_filename()
