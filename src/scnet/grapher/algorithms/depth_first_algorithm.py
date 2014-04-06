@@ -8,16 +8,11 @@ from scnet.grapher.interfaces.node import INode
 
 class DepthFirstAlgorithm(object):
     """
-    Implementiert den Depth First
-    Search Algorithm eines übergebenen
-    Eintrags.
+    Implements the depth first search algorithm for an
+    undirected graph.
     """
 
     def __init__(self, graph: IGraph, start_at: INode=None):
-        """
-        @param graph: Der Graph der durchsucht
-            werden soll.
-        """
         if start_at is None:
             start_at = graph.node_store.one()
         else:
@@ -25,31 +20,30 @@ class DepthFirstAlgorithm(object):
         self._graph = graph
         self._start_at = start_at
         self._stop_at = None
-        self._sort = False
+        self.sort = False
         self.traverse_tree = None
 
     @property
     def sort(self):
         """
-        Gibt zurück ob die Rückgaben vor der Auswertung
-        sortiert werden sollen. Dies kann durchgeführt
-        werden um eine nachvollziehbare Algorithmusrückgabe
-        zu gewährleisten..
+        Returns if before traversing the tree the neighbors
+        of the check node should be sorted. This can be helpful
+        if you want to test for the return.
         """
         return self._sort
 
     @sort.setter
     def sort(self, sort=False):
         """
-        Setzt ob die Nodes sortiert werden sollen.
+        Sets if the neighbors of a node should be sorted
+        by name before being traversed
         """
         self._sort = bool(sort)
 
     def traverse(self) -> INode:
         """
-        Traversiert den übergebenen Pfad und gibt
-        ein Set zurück, an Nodes die besucht
-        wurden.
+        Traverses the given node and returns the to find INode
+        if existing in the system.
         """
         first_node = self._start_at
         self.traverse_tree = traverse = []
@@ -84,9 +78,9 @@ class DepthFirstAlgorithm(object):
 
     def find(self, node_name: str) -> INode:
         """
-        Sucht den Pfad nach den übergebnenen Nodenamen
-        ab und gibt den Eintrag zurück.
-        Gibt den gefundenen Node zurück.
+        Searches in the graph after the node with the
+        given Node Name and returns this node if found
+        or None if no node could be found
         """
         self._stop_at = node_name
         return self.traverse()
