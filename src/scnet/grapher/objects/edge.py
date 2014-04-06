@@ -2,11 +2,15 @@
 
 from __future__ import unicode_literals
 
+from zope.interface import implementer
+
 from scnet.grapher.interfaces import INode
+from scnet.grapher.interfaces.edge import IEdge
 
 from .abstract import Abstract
 
 
+@implementer(IEdge)
 class Edge(Abstract):
     """
     Representation of an edge in the graph. This points
