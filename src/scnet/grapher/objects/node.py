@@ -56,3 +56,37 @@ class Node(Abstract):
         Returns a list of edges.
         """
         return self.edges_from + self.edges_to
+
+    @property
+    def parent_nodes(self) -> list:
+        """
+        Returns all nodes this node is a child of.
+        @rtype: iter[INode]
+        """
+        for edge in self.edges_to:
+            yield edge.from_node
+
+    @property
+    def child_nodes(self) -> list:
+        """
+        Returns all nodes this node is a parent of.
+        @rtype: iter[INode]
+        """
+        for edge in self.edges_from:
+            yield edge.to_node
+
+    @property
+    def neighbors(self) -> list:
+        """
+        Returns all nodes this node is a parent of.
+        @rtype: iter[INode]
+        """
+        nodes = set()
+        node_containers = (self.parent_nodes, self.child_nodes)
+        for node_container in node_containers:
+            for node in node_container:
+                if node in nodes:
+                    pass
+                else:
+                    yield node
+                    nodes.add(node)

@@ -18,3 +18,15 @@ class INode(Interface):
 
     edges = Attribute('list of all edges which start '
                       'or end in this node')
+
+    parent_nodes = Attribute('Returns all nodes this node is '
+                             'a child of.')
+    ":type: list[INode]"
+
+    child_nodes = Attribute('Returns all nodes this node is '
+                            'a parent of.')
+    ":type: list[INode]"
+
+    neighbors = Attribute('Returns all nodes this node has '
+                          'connections to.')
+    ":type: list[INode]"

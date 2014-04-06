@@ -13,5 +13,7 @@ class IGraph(Interface):
 
     node_store = Attribute('The store which holds '
                            'the nodes of this graph.')
+    """:type: INodeStore"""
     edge_store = Attribute('The store which holds '
                            'the edges of this graph.')
+    """:type: IEdgeStore"""

@@ -55,3 +55,53 @@ class TestEdge(AbstractBaseTest):
             self.edges[2],
             edges
         )
+
+    def test_parent_node_access(self):
+        """
+        IT should return all nodes the given node is a child of.
+        """
+        node1 = self.nodes[0]
+        parent_nodes = tuple(node1.parent_nodes)
+        self.assertEqual(
+            len(parent_nodes),
+            1
+        )
+        self.assertEqual(
+            parent_nodes[0],
+            self.nodes[2]
+        )
+    
+    def test_child_node_access(self):
+        """
+        It should return all nodes the given node is a parent of.
+        """
+        node1 = self.nodes[0]
+        child_nodes = tuple(node1.child_nodes)
+        self.assertEqual(
+            len(child_nodes),
+            1
+        )
+        self.assertEqual(
+            child_nodes[0],
+            self.nodes[1]
+        )
+
+    def test_neighbors_access(self):
+        """
+        Es sollte alle Nachbarn über die Neighbors Funktion
+        zurück geben.
+        """
+        node1 = self.nodes[0]
+        neighbors = tuple(node1.neighbors)
+        self.assertEqual(
+            len(neighbors),
+            2
+        )
+        self.assertIn(
+            self.nodes[1],
+            neighbors,
+        )
+        self.assertIn(
+            self.nodes[2],
+            neighbors,
+        )
