@@ -32,7 +32,7 @@ class TestCycleDetection(AbstractBaseTest):
         )
         self.assertEqual(
             tuple(node.name for node in cycle_detection.cycle),
-            ("A","B","C","D")
+            ("A", "B", "C", "D")
         )
 
     def test_cycle_in_graph(self):
