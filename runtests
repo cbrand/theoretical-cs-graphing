@@ -1,0 +1,2 @@
+#!/bin/bash
+nosetests src test --with-coverage --cover-package="scnet.grapher"
