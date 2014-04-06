@@ -65,6 +65,7 @@ class CycleDetection(AbstractDetection):
         Resets the internal data structures
         used for detection
         """
+        self.reset_cycle()
         self.reset_stack()
         self.reset_traverse()
 
