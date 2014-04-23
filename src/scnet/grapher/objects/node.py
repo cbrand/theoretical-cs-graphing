@@ -26,7 +26,7 @@ class Node(Abstract):
         self.name = node_name
         super().__init__()
 
-    def __str__(self) -> str:
+    def __repr__(self) -> str:
         """
         String representation of this node object.
         """
