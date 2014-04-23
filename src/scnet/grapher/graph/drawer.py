@@ -79,7 +79,7 @@ class GraphDrawer(object):
         edge_labels = {}
         for from_node, to_node, edge_data in graph.edges(data=True):
             if 'weight' in edge_data:
-                edge_data[(from_node, to_node,)] = edge_data['weight']
+                edge_labels[(from_node, to_node,)] = edge_data['weight']
             else:
                 pass
         return edge_labels
