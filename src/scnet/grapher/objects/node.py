@@ -7,6 +7,7 @@ from zope.interface import implementer
 from scnet.grapher.interfaces import INode
 
 from .abstract import Abstract
+from .edge_proxy import EdgeProxy
 
 
 @implementer(INode)
@@ -37,18 +38,24 @@ class Node(Abstract):
         """
         Returns a list of edges, which are starting from
         this node.
-        @rtype: iter[IEdge]
+        @rtype: iter[IEdgeProxy]
         """
-        return self.edge_store.from_node(self)
+        return tuple(
+            EdgeProxy(edge, self)
+            for edge in self.edge_store.from_node(self)
+        )
 
     @property
     def edges_to(self) -> list:
         """
         Returns a list of edges, which are ending at this
         node.
-        @rtype: iter[IEdge]
+        @rtype: iter[IEdgeProxy]
         """
-        return self.edge_store.to_node(self)
+        return tuple(
+            EdgeProxy(edge, self)
+            for edge in self.edge_store.to_node(self)
+        )
 
     @property
     def edges(self) -> list:
@@ -90,3 +97,9 @@ class Node(Abstract):
                 else:
                     yield node
                     nodes.add(node)
+
+    def __eq__(self, other):
+        if isinstance(other, str):
+            return self.name == other
+        else:
+            return super(Node, self).__eq__(other)

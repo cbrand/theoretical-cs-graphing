@@ -5,6 +5,8 @@ from __future__ import unicode_literals
 import io
 
 from zope.component.hooks import getSiteManager
+from scnet.grapher.interfaces.graph import IGraph
+from scnet.grapher.objects.graph import Graph
 
 from scnet.grapher.tokenizer import Tokenizer
 from scnet.grapher.parser import parser_definition
@@ -55,7 +57,7 @@ class Reader(object):
         except (IOError, OSError):  # pragma: no cover
             pass
 
-    def parse(self) -> ReaderReturn:
+    def parse(self) -> IGraph:
         """
         Parses the data and returns the configuration
         objects which hold the information stored in the
@@ -82,7 +84,7 @@ class Reader(object):
             node_store=node_store,
         )
 
-        return ReaderReturn(
+        return Graph(
             edge_store=edge_store,
             node_store=node_store,
         )
