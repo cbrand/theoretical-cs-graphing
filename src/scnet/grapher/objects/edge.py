@@ -68,3 +68,16 @@ class Edge(Abstract):
         """
         yield self.from_node
         yield self.to_node
+
+    def __eq__(self, other: IEdge):
+        """
+        Prüft ob der andere Edge dem gleichen entspricht.
+        """
+        if not IEdge.providedBy(other):
+            return super().__eq__(other)
+        else:
+            return (
+                other.from_node_name == self.from_node_name and
+                other.to_node_name == self.to_node_name and
+                other.weight == self.weight
+            )

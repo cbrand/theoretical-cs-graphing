@@ -40,7 +40,7 @@ class Node(Abstract):
         this node.
         @rtype: iter[IEdgeProxy]
         """
-        return tuple(
+        return list(
             EdgeProxy(edge, self)
             for edge in self.edge_store.from_node(self)
         )
@@ -52,7 +52,7 @@ class Node(Abstract):
         node.
         @rtype: iter[IEdgeProxy]
         """
-        return tuple(
+        return list(
             EdgeProxy(edge, self)
             for edge in self.edge_store.to_node(self)
         )
@@ -97,6 +97,8 @@ class Node(Abstract):
                 else:
                     yield node
                     nodes.add(node)
+
+    __hash__ = Abstract.__hash__
 
     def __eq__(self, other):
         if isinstance(other, str):

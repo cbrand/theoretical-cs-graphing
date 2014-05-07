@@ -86,3 +86,27 @@ class TestDijkstra(AbstractBaseTest):
             ['A', 'B', 'C', 'D']
         )
 
+    def test_dijkstra_input_nodes(self):
+        """
+        It should be able to run the dijkstra via the input
+        notes.
+        """
+        algorithm = DijkstraAlgorithm(
+            self.graph,
+            from_node=self.graph.node_store.get('A'),
+            to_node=self.graph.node_store.get('D'),
+        )
+        self.assertEqual(
+            [node.name for node in algorithm.run()],
+            ['A', 'B', 'C', 'D']
+        )
+
+    def test_no_input(self):
+        """
+        It should raise an error if it is running
+        with an empty graph.
+        """
+        self.graph = self.prepare_graph(
+            nodes=[],
+            edges=[],
+        )

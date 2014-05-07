@@ -52,3 +52,4 @@ class EdgeProxy(object):
     to_node = proxy_attribute('to_node')
     nodes = proxy_attribute('nodes')
     weight = proxy_attribute('weight')
+    __eq__ = proxy_attribute('__eq__')

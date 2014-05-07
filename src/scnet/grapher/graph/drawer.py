@@ -12,6 +12,7 @@ from scnet.grapher.interfaces import (
     INodeStore,
     IEdge
 )
+from scnet.grapher.interfaces.graph import IGraph
 
 
 class GraphDrawer(object):
@@ -20,15 +21,25 @@ class GraphDrawer(object):
     """
 
     def __init__(
-        self,
-        edge_store=None,
-        node_store=None,
+            self,
+            edge_store=None,
+            node_store=None,
     ):
         self.edge_store = edge_store
         self.node_store = node_store
 
+    @classmethod
+    def from_graph(cls, graph: IGraph):
+        """
+        Creates a drawer instance from a given graph.
+        """
+        return cls(
+            node_store=graph.node_store,
+            edge_store=graph.edge_store,
+        )
+
     def show(self):  # pragma: no cover
-                     # (not testable with unittest)
+        # (not testable with unittest)
         self._draw()
         return plt.show()
 

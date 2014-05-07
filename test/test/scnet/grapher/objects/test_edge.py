@@ -73,3 +73,10 @@ class TestEdge(unittest.TestCase):
             nodes
         )
         return nodes
+
+    def test_eq(self):
+        """
+        It should support the eq operator with non
+        nodes given into it.
+        """
+        self.assertFalse(self.edge == "1")
