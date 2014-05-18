@@ -52,3 +52,14 @@ class TestGreedyColAlgorithm(AbstractBaseTest):
             len(data),
             4
         )
+
+    def test_minimum_with_set(self):
+        """
+        It should also be able to extract
+        the minimum from a python set with
+        integers in it.
+        """
+        self.assertEqual(
+            GreedyColAlgorithm.possible_minimum(set(range(0, 211))),
+            211
+        )

@@ -20,14 +20,16 @@ class GreedyColAlgorithm(object):
     ):
         self.graph = graph
 
-    def get_colors(self, amount: int) -> list:
+    @staticmethod
+    def get_colors(amount: int) -> list:
         """
         Returns evenly spreaded colors.
         :param amount: The number of colors needed.
         """
         return [float(i)/float(amount) for i in range(amount)]
 
-    def possible_minimum(self, data: Iterable):
+    @staticmethod
+    def possible_minimum(data: Iterable):
         """
         Returns the possible minimum value. Expects a set
         with integers. If the data does not have 0 it returns
