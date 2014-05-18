@@ -47,7 +47,8 @@ class TestGreedyColAlgorithm(AbstractBaseTest):
             edges=self.edges,
         )
         graph = GreedyColAlgorithm(self.graph).run()
-        self.assertEqual(
-            len(set(node.color for node in graph.node_store)),
+        data = set(node.color for node in graph.node_store)
+        self.assertLessEqual(
+            len(data),
             4
         )
