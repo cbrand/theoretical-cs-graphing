@@ -14,7 +14,7 @@ class TestGreedyColAlgorithm(AbstractBaseTest):
     Tests the minimum spanning tree definition.
     """
 
-    def test_dijkstra(self):
+    def test_greedy_col(self):
         """
         Tests the algorithm with giving test data into
         it.
@@ -49,5 +49,5 @@ class TestGreedyColAlgorithm(AbstractBaseTest):
         graph = GreedyColAlgorithm(self.graph).run()
         self.assertEqual(
             len(set(node.color for node in graph.node_store)),
-            3
+            4
         )
