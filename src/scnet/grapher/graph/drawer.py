@@ -10,7 +10,8 @@ from zope.component import getSiteManager
 from scnet.grapher.interfaces import (
     IEdgeStore,
     INodeStore,
-    IEdge
+    IEdge,
+    INode
 )
 from scnet.grapher.interfaces.graph import IGraph
 
@@ -57,7 +58,7 @@ class GraphDrawer(object):
         """
         graph = networkx.Graph()
         for node in self.node_store:
-            graph.add_node(node.name)
+            self._add_node(graph, node)
         for edge in self.edge_store:
             self._add_edge(graph, edge)
 
@@ -69,20 +70,42 @@ class GraphDrawer(object):
         Draws the given graph.
         """
         pos = networkx.fruchterman_reingold_layout(graph)
-        networkx.draw(graph, pos, node_size=1000)
 
-        self.edge_weights = self.get_edge_weights_for_label(
-            graph
+        draw_args = dict(
+            node_size=1000,
+            node_color=self._get_node_colors(
+                graph
+            ),
+            cmap=plt.get_cmap('Set1')
         )
+
+        networkx.draw(
+            graph,
+            pos,
+            **draw_args
+        )
+
         networkx.draw_networkx_edge_labels(
             graph,
             pos,
-            edge_labels=self.get_edge_weights_for_label(
+            edge_labels=self._get_edge_weights_for_label(
                 graph
             )
         )
 
-    def get_edge_weights_for_label(self, graph: networkx.Graph):
+    def _get_node_colors(self, graph: networkx.Graph):
+        """
+        Returns a mapping for all nodes with a given color,
+        if a color has been specified. Does not add nodes
+        which don't have a color.
+        """
+        color_list = []
+        for node, node_data in graph.nodes(data=True):
+            color_list.append(node_data.get('node_color', 0.0))
+        return color_list
+
+
+    def _get_edge_weights_for_label(self, graph: networkx.Graph):
         """
         Returns a mapping for all edges which print the
         weight if a weight has been given for the entry.
@@ -94,6 +117,20 @@ class GraphDrawer(object):
             else:
                 pass
         return edge_labels
+
+    def _add_node(self, graph: networkx.Graph, node: INode):
+        """
+        Adds a node to the given graph.
+        """
+        kwargs = dict()
+        if node.color:
+            kwargs.update(
+                dict(
+                    node_color=node.color,
+                )
+            )
+        graph.add_node(node.name, **kwargs)
+
 
     def _add_edge(self, graph: networkx.Graph, edge: IEdge):
         """
