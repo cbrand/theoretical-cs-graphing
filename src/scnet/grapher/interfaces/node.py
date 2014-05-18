@@ -30,3 +30,6 @@ class INode(Interface):
     neighbors = Attribute('Returns all nodes this node has '
                           'connections to.')
     ":type: list[INode]"
+
+    color = Attribute('The color of the node. None will give '
+                      'the entry an automatic color.')

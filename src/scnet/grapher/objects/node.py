@@ -25,6 +25,7 @@ class Node(Abstract):
         """
         assert isinstance(node_name, str), 'Passed entry has to be of type str'
         self.name = node_name
+        self.color = None
         super().__init__()
 
     def __repr__(self) -> str:
@@ -99,6 +100,20 @@ class Node(Abstract):
                     nodes.add(node)
 
     __hash__ = Abstract.__hash__
+    
+    @property
+    def color(self):
+        """
+        Returns the color code of this node.
+        """
+        return self._color
+
+    @color.setter
+    def color(self, value):
+        """
+        Sets the color of this node.
+        """
+        self._color = value
 
     def __eq__(self, other):
         if isinstance(other, str):
